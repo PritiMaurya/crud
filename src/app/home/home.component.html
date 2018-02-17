@@ -126,8 +126,43 @@
 
 
 <div class="container">
+<div class="row">
+    <input class="form-control" type="text" placeholder="Search" name="search" [(ngModel)]="filter" style="width: 100px; margin: 10px">
+</div>
   <table class="table table-bordered">
-    <tr *ngFor="let d of data">
+    <thead>
+    <tr >
+      <th (click)="sort('fname')">
+        first Name
+        <span class="glyphicon sort-icon" *ngIf="key =='fname'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+      </th>
+      <th (click)="sort('lname')">
+        Last Name
+        <span class="glyphicon sort-icon" *ngIf="key =='lname'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+      </th>
+      <th (click)="sort('email')">
+        Email
+        <span class="glyphicon sort-icon" *ngIf="key =='email'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+      </th>
+      <th (click)="sort('state')">
+        State
+        <span class="glyphicon sort-icon" *ngIf="key =='state'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+      </th>
+      <th (click)="sort('city')">
+        City
+        <span class="glyphicon sort-icon" *ngIf="key =='city'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+      </th>
+      <th>
+        Delete
+      </th>
+      <th>
+        Update
+
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let d of data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i=index;">
       <td>
         {{d.fname}}
       </td>
@@ -150,6 +185,7 @@
         <button class="btn btn-primary" (click)="onEdit(d._id)" >Update</button>
       </td>
     </tr>
+    </tbody>
   </table>
 </div>
 

@@ -9,36 +9,35 @@ import {MyAppServiceService} from "../my-app-service.service";
 })
 export class HomeComponent implements OnInit {
   @ViewChild('f') form: NgForm
-  state= '';
+  state = '';
   city = '';
   fname = '';
   lname = '';
   password = '';
-  email ='';
+  email = '';
   id = '';
 
-  user ={
-    fname:'',
-    lname:'',
-    email:'',
-    password:'',
-    state:'',
-    city:'',
-    id: ''
+  user = {
+    fname : '',
+    lname : '',
+    email : '',
+    password : '',
+    state : '',
+    city : '',
+    id : ''
   }
 
-  data=[]
+  data = []
 
 
   constructor(private myService: MyAppServiceService) { }
 
 
-  editMode:boolean = false;
+  editMode: boolean = false;
   ngOnInit() {
-   this.select()
+   this.select();
   }
-  onSubmit()
-  {
+  onSubmit() {
     this.user.fname = this.form.value.fname;
     this.user.lname = this.form.value.lname;
     this.user.email = this.form.value.email;
@@ -101,10 +100,17 @@ export class HomeComponent implements OnInit {
     this.user.state = this.form.value.state;
     this.user.city = this.form.value.city;
     this.user.id = this.id;
-    this.myService.update(this.user).subscribe((response)=>{
+    this.myService.update(this.user).subscribe((response)=>
+    {
       this.select();
     });
+    this.form.resetForm();
     // location.reload()
-
+  }
+  key='fname';
+  reverse: boolean = false;
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 }

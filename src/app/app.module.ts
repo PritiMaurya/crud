@@ -7,24 +7,31 @@ import { HomeComponent } from './home/home.component';
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {MyAppServiceService} from "./my-app-service.service";
-import { DisplayComponent } from './display/display.component';
+
 import {RouterModule, Routes} from "@angular/router";
+import { LoginComponent } from './login/login.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {Ng2OrderModule} from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const appRoute: Routes =[
   {path:'', component: HomeComponent},
-  {path:'display', component: DisplayComponent}
+  {path:'login', component:LoginComponent}
   ]
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DisplayComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule,
     RouterModule.forRoot(appRoute)
   ],
   providers: [MyAppServiceService],
