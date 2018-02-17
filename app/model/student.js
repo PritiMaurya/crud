@@ -1,6 +1,6 @@
 const {mongoose} = require('../db/mongoose-connect');
 const validator = require('validator');
-
+const jwt = require('jsonwebtoken')
 
 const studentSchema = new mongoose.Schema({
     fname:{
@@ -49,6 +49,12 @@ const studentSchema = new mongoose.Schema({
 });
 
 
+
+studentSchema.methods.generateAuthToken = function () {
+    var user = this;
+    var access = 'auth'
+    var token = jwt.sign({_id:user._id.toHexString(),access},'priti123').toString();
+}
 
 
 

@@ -22,15 +22,22 @@ app.post('/insert',(req,res)=>{
     });
 
     newdata.save().then((data)=>{
-       res.send(data)
+       res.send(data);
     })
 });
 
 
 app.get('/select',(req,res)=>{
-    Student.find({status:true}).then((data)=>{
+    //use limit
+    // Student.find({status:true}).limit(2).then((data)=>{
+    //     res.send(data);
+    // });
+
+    //display sort data fname wise
+    Student.find({status:true}).sort({"fname":1}).then((data)=>{
         res.send(data);
     });
+
 });
 
 
@@ -85,7 +92,6 @@ app.post('/find',(req,res)=>{
         res.send("data not found");
     });
 });
-
 
 app.listen(3001,()=>{
     console.log('running port 3001')
